@@ -359,6 +359,7 @@ function start_assemble() {
             instr_values['PC'] = '0x' + binaryToHex(PC);
             updateInstructionTable('initial');
             enableBtn(fetchBtn);
+            enableBtn(runBtn);
         }
     }
 }

@@ -11,6 +11,7 @@ let instr_values = {
 const fetchBtn = document.getElementById('fetchBtn');
 const decodeBtn = document.getElementById('decodeBtn');
 const executeBtn = document.getElementById('executeBtn');
+const runBtn = document.getElementById('runBtn');
 const endprogramBtn = document.getElementById('endprogramBtn');
 const end_notif_box = document.getElementById('endProgram_notif');
 const current_instruction = document.getElementById('current-instruction');
@@ -449,6 +450,22 @@ function resetProgram() {
     location.reload();
 }
 
+function run_program() {
+    let opcode = parseInt(opcode_operation, 2);
+    let operation = operation_code;
+    let isEnd =  opcode == 7 && I == 0 && operation == 11;
+
+    while(!isEnd) {
+        fetch_instruction();
+        decode_instruction();
+        execute_instruction();
+
+        opcode = parseInt(opcode_operation, 2);
+        operation = operation_code;
+        isEnd =  opcode == 7 && I == 0 && operation == 11;
+    }
+}
+
 const helpBtn = document.getElementById("helpBtn");
 const closeBtn = document.getElementById("close-btn");
 const rules = document.getElementById("help");
@@ -458,6 +475,8 @@ const resetBtn = document.getElementById("resetBtn");
 fetchBtn.addEventListener('click', fetch_instruction);
 decodeBtn.addEventListener('click', decode_instruction);
 executeBtn.addEventListener('click', execute_instruction);
+runBtn.addEventListener('click', run_program);
+
 helpBtn.addEventListener("click", () => {
     rules.classList.add("show");
 });
